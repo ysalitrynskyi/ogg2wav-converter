@@ -1,0 +1,14 @@
+services:
+  ogg2wav:
+    build: .
+    image: ysalitrynskyi/ogg2wav-converter:latest
+    ports:
+      - "5000:5000"
+    environment:
+      # All optional -- defaults preserve original behavior.
+      # PORT: "5000"
+      # WEB_CONCURRENCY: "2"
+      # FFMPEG_TIMEOUT: "60"
+      # MAX_CONTENT_LENGTH: "104857600"
+      LOG_LEVEL: "info"
+    restart: unless-stopped
