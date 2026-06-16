@@ -3,7 +3,7 @@
 All notable changes to this project are documented here. This project adheres to
 [Semantic Versioning](https://semver.org/).
 
-## [1.1.0]
+## [1.1.0] - 2026-06-16
 
 ### Added
 - `GET /health` liveness endpoint (also wired into the Docker `HEALTHCHECK`).
