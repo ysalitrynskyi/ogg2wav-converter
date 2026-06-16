@@ -1,6 +1,7 @@
 # OGG → WAV Converter Microservice
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/ysalitrynskyi/ogg2wav-converter)](https://hub.docker.com/r/ysalitrynskyi/ogg2wav-converter)
+[![Build and Publish](https://github.com/ysalitrynskyi/ogg2wav-converter/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/ysalitrynskyi/ogg2wav-converter/actions/workflows/docker-publish.yml)
+[![Container](https://img.shields.io/badge/ghcr.io-ogg2wav--converter-2496ED?logo=github)](https://github.com/ysalitrynskyi/ogg2wav-converter/pkgs/container/ogg2wav-converter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/)
 
@@ -15,8 +16,10 @@ pre-processing step for speech-to-text / ASR pipelines.
 
 ## Quick start
 
+The image is built by CI and published to the GitHub Container Registry (GHCR):
+
 ```bash
-docker run -p 5000:5000 ysalitrynskyi/ogg2wav-converter:latest
+docker run -p 5000:5000 ghcr.io/ysalitrynskyi/ogg2wav-converter:latest
 ```
 
 Convert a file:
@@ -117,7 +120,7 @@ Example:
 ```bash
 docker run -p 8080:8080 \
   -e PORT=8080 -e WEB_CONCURRENCY=4 -e FFMPEG_TIMEOUT=120 \
-  ysalitrynskyi/ogg2wav-converter:latest
+  ghcr.io/ysalitrynskyi/ogg2wav-converter:latest
 ```
 
 ---
@@ -142,6 +145,10 @@ python -m pytest tests/     # run the test suite
 no client changes needed. See [CHANGELOG.md](CHANGELOG.md) for what's new
 (health endpoint, optional `sample_rate`/`channels`, gunicorn, hardening).
 
+```bash
+docker pull ghcr.io/ysalitrynskyi/ogg2wav-converter:latest
+```
+
 ---
 
 ## How it works
@@ -156,6 +163,28 @@ up its temp files. FFmpeg runs with a timeout and the container runs as a
 non-root user.
 
 ---
+
+## Container image
+
+Images are built and published automatically by
+[GitHub Actions](.github/workflows/docker-publish.yml) to GHCR on every push to
+`main` and on version tags.
+
+| Tag                    | Points to                                  |
+| ---------------------- | ------------------------------------------ |
+| `latest`               | Latest build from `main`.                  |
+| `1.1.0`, `1.1`         | Specific release (pushed from `vX.Y.Z` git tags). |
+| `main`, `sha-<commit>` | Branch / commit-pinned builds.             |
+
+```bash
+docker pull ghcr.io/ysalitrynskyi/ogg2wav-converter:latest
+```
+
+Cutting a release:
+
+```bash
+git tag v1.1.0 && git push origin v1.1.0   # CI builds and publishes the tag
+```
 
 ## License
 

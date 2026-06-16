@@ -13,6 +13,8 @@ All notable changes to this project are documented here. This project adheres to
 - Production WSGI server (gunicorn) with env-tunable workers/threads/timeout.
 - Configurable limits via env: `MAX_CONTENT_LENGTH`, `FFMPEG_TIMEOUT`, `PORT`.
 - Test suite, `docker-compose.yml`, `.dockerignore`, MIT `LICENSE`.
+- GitHub Actions CI that runs tests and publishes the image to the GitHub
+  Container Registry (`ghcr.io/ysalitrynskyi/ogg2wav-converter`).
 
 ### Changed
 - FFmpeg now runs with a timeout (default 60s) so a malformed input cannot hang
